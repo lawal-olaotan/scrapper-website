@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const webpage =  await getPageContent(urlName)
         const data = JSON.stringify({webpage, name:name.value,isSubscription:isSubscription.value})
       
-        const backendURI = 'http://localhost:8080/'
-        // "https://test.joineconome.com/" 
+        const backendURI = "https://test.joineconome.com/" 
         const response = await fetch(backendURI+'save',{
             method: 'POST',
             body:data,  
