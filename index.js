@@ -2,18 +2,22 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
     const formElement = document.querySelector('#scrappeForm')
-    const url = document.querySelector('#url')
-    const name = document.querySelector("#name")
+    const name = document.querySelector('#name')
+    const isSubscription = document.querySelector("#type")
 
     formElement.addEventListener('submit', async(event)=> {
+
         event.preventDefault()
-        const webpage =  await getPageContent(url.value)
-        const data = JSON.stringify({webpage, name:name.value})
-        const backendURI = "https://test.joineconome.com/"
+        let urlName = name.value
+        const webpage =  await getPageContent(urlName)
+        const data = JSON.stringify({webpage, name:name.value,isSubscription:isSubscription.value})
+      
+        const backendURI = 'http://localhost:8080/'
+        // "https://test.joineconome.com/" 
         const response = await fetch(backendURI+'save',{
             method: 'POST',
             body:data,  
-            headers:{"Content-Type": "application/json" }
+            headers:{"Content-Type": "application/json" },
         })
         
         if(response.ok) return clearInput('success')
@@ -34,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     const clearInput = (message) => {
         alert(message)
-        url.value = ''
         name.value = ''
     }
 

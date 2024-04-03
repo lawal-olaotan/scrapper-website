@@ -39,7 +39,7 @@ label{
     font-size: 24px;
 }
 
-input {
+input, select{
     padding: 6px;
     width: 380px;
 }
